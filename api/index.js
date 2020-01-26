@@ -13,12 +13,15 @@ function getWords(text){
                 .split(/[^\w\u2019']+/);
 }
 
-router.get('/topn', function(req, res){
+router.get('/topn', function(req, res, next){
     request.get('https://terriblytinytales.com/test.txt', function(err, response, body){
         if(!err && response.statusCode==200){
 
             let freq = {};
-            const n = parseInt(req.query.n || 5);
+            const n = req.query.n ? parseInt(req.query.n):5;
+            
+            if(isNaN(n) || n<0) return next();
+
             getWords(body).forEach(w => {
                 if(freq.hasOwnProperty(w)) freq[w]++;
                 else freq[w]=1;

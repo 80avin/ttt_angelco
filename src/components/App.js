@@ -9,7 +9,7 @@ import './../css/App.css';
 class App extends React.Component{
     render(){
         return (
-            <div className="col-6 mx-auto">
+            <div className="col-sm-6 mx-auto">
                 <div className="container mt-3">
                     <Description />
                 </div>
